@@ -144,7 +144,7 @@ void right_down(int x,int y)
 {
     int xp=x,yp=y;
     float old,new;
-    if(x<9 && y<9)
+    if(x<9 && y<9 &&(parent[yp][xp+1][0]!=100 && parent[yp][xp+1][1]!=100 && parent[yp+1][xp][0]!=100 && parent[yp+1][xp][1]!=100 ))
     {
         x=x+1;
         y=y+1;
@@ -187,7 +187,7 @@ void left_down(int x,int y)
 {
     int xp=x,yp=y;
     float old,new;
-    if(y<9 && x>0)
+    if(y<9 && x>0 &&(parent[yp][xp-1][0]!=100 && parent[yp][xp-1][1]!=100 && parent[yp+1][xp][0]!=100 && parent[yp+1][xp][1]!=100 ))
     {
 	y=y+1;
 	x=x-1;
@@ -230,7 +230,7 @@ void left_up(int x,int y)
 {
     int xp=x,yp=y;
     float old,new;
-    if(y>0 && x>0)
+    if(y>0 && x>0 &&(parent[yp][xp-1][0]!=100 && parent[yp][xp-1][1]!=100 && parent[yp-1][xp][0]!=100 && parent[yp-1][xp][1]!=100 ))
     {
 	y=y-1;
 	x=x-1;
@@ -273,7 +273,7 @@ void right_up(int x,int y)
 {
     int xp=x,yp=y;
     float old,new;
-    if(y>0 && x<9)
+    if(y>0 && x<9 &&(parent[yp][xp+1][0]!=100 && parent[yp][xp+1][1]!=100 && parent[yp-1][xp][0]!=100 && parent[yp-1][xp][1]!=100 ))
     {
 	y=y-1;
 	x=x+1;
