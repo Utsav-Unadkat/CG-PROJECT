@@ -24,7 +24,6 @@ void bfill(int x,int y,int col, int ch){
 void initialize()
 {
     int i,j;
-   // char c='1';
     for(i=0;i<10;i++)
     {
 	for(j=0;j<10;j++)
@@ -35,25 +34,6 @@ void initialize()
 	    parent[i][j][1]=99; //y
         }
     }
-    /*printf("Enter xs: ");
-    scanf("%d",&xs);
-    printf("Enter ys: ");
-    scanf("%d",&ys);
-    printf("Enter xe: ");
-    scanf("%d",&xe);
-    printf("Enter ye: ");
-    scanf("%d",&ye);*/
-    /*while(c=='1')
-    {
-        printf("Enter xb: ");
-        scanf("%d",&xb);
-        printf("Enter yb: ");
-	scanf("%d",&yb);
-        parent[yb][xb][0]=100;
-        parent[yb][xb][1]=100;
-        //printf("%d %d\n", parent[yb][xb][0], parent[yb][xb][1]);
-        c=getch();
-    }*/
 }
 
 void extract_min(int *x,int *y)
@@ -86,38 +66,6 @@ float parent_cost(int xp,int yp)
     return cost;
     
 }
-
-/*void display()
-{
-    int i,j;
-    printf("visit array \n\n");
-    for(i=0;i<5;i++)
-    {
-        for (j=0;j<5;j++)
-        {
-            printf("%d ",visit[i][j]);
-	}
-        printf("\n");
-    }
-    printf("distance array \n\n");
-    for(i=0;i<5;i++)
-    {
-        for (j=0;j<5;j++)
-        {
-            printf("%f ",distance[i][j]);
-        }
-        printf("\n");
-    }
-    printf("parent array \n\n");
-    for(i=0;i<5;i++)
-    {
-        for (j=0;j<5;j++)
-        {
-	    printf("%d,%d ",parent[i][j][0],parent[i][j][1]);
-        }
-        printf("\n");
-    }
-}*/
 
 void right(int x,int y)
 {
@@ -317,12 +265,10 @@ void trace()
     printf("Tracing back : \n");
     while(x!=xs || y!=ys)
     {
-    //printf("%d,%d \n",parent[y][x][0],parent[y][x][1]);
     x_co=parent[y][x][0]*40+1;
     y_co=parent[y][x][1]*40+21;
     bfill(x_co,y_co,getpixel(x_co,y_co),6);
     delay(10);
-    //printf("%d %d %d %d--",x,y,x_co,y_co);
 	temp=parent[y][x][0];
 	y=parent[y][x][1];
 	x=temp;
@@ -354,7 +300,6 @@ void fill(char c)
    {
     xe=xc/40;
     ye=(yc-20)/40;
-   // printf("%d %d ",xe,ye);
    }
    if(c=='3')
    {
@@ -384,14 +329,14 @@ void main()
  int gd=DETECT,gm;
  int in,j,xc,yc;
  char c='1';
- printf("WELCOME\n");
- printf("FOLLOW THE SEQUENCE FOR PROPER EXECUTION:\n");
- printf("_______________\n");
- printf("press 1 and click to select start");
- printf("\npress 2 and click to select end");
- printf("\npress 3 and create obstacle");
- getch();
  initgraph(&gd,&gm,"C:\\TURBOC3\\BGI");
+ settextstyle(0,0,1);
+ outtextxy(420,0,"WELCOME");
+ outtextxy(420,10,"FOLLOW THE SEQUENCE FOR PROPER EXECUTION:");
+ outtextxy(420,20,"press 1 and click to select start");
+ outtextxy(420,30,"press 2 and click to select end");
+ outtextxy(420,40,"press 3 and create obstacle");
+ getch();
  for(in=0;in<=360;in=in+40)
 {
   for(j=20;j<=380;j=j+40)
@@ -403,9 +348,9 @@ void main()
   i.x.ax=1;
   int86(51,&i,&o);
   c=getch();
-  fill(c) ;  //start
+  fill(c) ;    //start
   c=getch();
-  fill(c) ;        //end
+  fill(c) ;    //end
   initialize();
   block();
 
@@ -413,7 +358,6 @@ void main()
   printf("xs=%d ys=%d xe=%d ye=%d",xs,ys,xe,ye);
    // printf("****\n Algo Begins \n");
     find(xs,ys);
-    //display();
     trace();
     delay(1000);
 
