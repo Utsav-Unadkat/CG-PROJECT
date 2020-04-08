@@ -2,25 +2,39 @@
  Visualization of shortest path
 ## STEPS TO USE THE APP
 * Enter Any key to get to grid
+
 ![](Images%20for%20Algo/Screenshot%20(13).png)
+
 * Enter 1 and select a cell with mouse this will be your start point (coloured blue)
-![](Images%20for%20Algo/01.png)
+
+![](Images%20for%20Algo/Screenshot%20(14).png)
+
 * Enter 2 and select a cell with mouse this will be your end point (coloured green)
-![](Images%20for%20Algo/01.png)
+
+![](Images%20for%20Algo/Screenshot%20(15).png)
+
 * Enter 3 and select a cell with mouse this will block those cell (coloured cyan)
-![](Images%20for%20Algo/01.png)
 * Repeat above step to create as manay block as you need
-![](Images%20for%20Algo/01.png)
+
+![](Images%20for%20Algo/Screenshot%20(16).png)
+
 
 ```
 Note Don't Enter any other key and follow the steps carefully
 ```
 
-* Enter any key to start the algo 
-![](Images%20for%20Algo/01.png)
+* Enter any key to start the algo
+
+![](Images%20for%20Algo/Screenshot%20(17).png)
+
+![](Images%20for%20Algo/Screenshot%20(18).png)
+
 
 ### Visualization
 The algo will begin from start point and spread out according to Dijiksta Algorithm all the visited cell are coloured light purple and once it reaches the end point it starts tracing back of the shortest path.The path can be seen coloured as Orange.
+
+![](Images%20for%20Algo/Screenshot%20(19).png)
+
 
 ## Explanation Of Algorithm
  This is a sample grid with three blocks, Let’s find shortest distance from start on (0,0) to end on (4,2). 
