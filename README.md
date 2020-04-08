@@ -25,6 +25,11 @@ Note Don't Enter any other key and follow the steps carefully
 
 * Enter any key to start the algo
 
+```
+Please keep the mouse off the grid to avoid crashing of the application and then hit Enter
+```
+
+
 ![](Images%20for%20Algo/Screenshot%20(17).png)
 
 ![](Images%20for%20Algo/Screenshot%20(18).png)
