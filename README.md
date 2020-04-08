@@ -30,13 +30,13 @@ Note Don't Enter any other key and follow the steps carefully
 ![](Images%20for%20Algo/Screenshot%20(18).png)
 
 
-### Visualization
+## Visualization
 The algo will begin from start point and spread out according to Dijiksta Algorithm all the visited cell are coloured light purple and once it reaches the end point it starts tracing back of the shortest path.The path can be seen coloured as Orange.
 
 ![](Images%20for%20Algo/Screenshot%20(19).png)
 
 
-## Explanation Of Algorithm
+# Explanation Of Algorithm
  This is a sample grid with three blocks, Let’s find shortest distance from start on (0,0) to end on (4,2). 
 
 ![](Images%20for%20Algo/01.png)
