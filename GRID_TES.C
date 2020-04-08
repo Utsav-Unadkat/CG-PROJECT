@@ -9,9 +9,10 @@ union REGS i,o;
 float distance[10][10];
 int parent[10][10][2],visit[10][10];
 int xs,ys,xe,ye,xb,yb;
+char state='1';
 
 void bfill(int x,int y,int col, int ch){
- if(getpixel(x,y)==col && getpixel(x,y)!=WHITE){
+ if(getpixel(x,y)==col && getpixel(x,y)!=WHITE && getpixel(x,y)!=1){
   putpixel(x,y,ch);
   bfill(x-1,y,col,ch);
   bfill(x,y-1,col,ch);
@@ -83,7 +84,8 @@ void right(int x,int y)
                 distance[y][x]=new;
                 parent[y][x][0]=xp;
                 parent[y][x][1]=yp;
-	    }
+	        }
+            bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
         }    
     }
 }
@@ -100,12 +102,14 @@ void right_down(int x,int y)
         {
             old=distance[y][x];
             new = parent_cost(xp,yp) + 1.4;
-	    if (new<old)
+	        if (new<old)
             {
                 distance[y][x]=new;
                 parent[y][x][0]=xp;
                 parent[y][x][1]=yp;
-            }   
+            }
+        if(getpixel(xp*40+1,yp*40+21)!=9)
+    bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
         }     
     }
 }
@@ -123,10 +127,12 @@ void down(int x,int y)
 	    new = parent_cost(xp,yp) + 1.0;
 	    if (new<old)
 	    {
-		distance[y][x]=new;
-		parent[y][x][0]=xp;
-		parent[y][x][1]=yp;
+            distance[y][x]=new;
+            parent[y][x][0]=xp;
+            parent[y][x][1]=yp;
 	    }
+        if(getpixel(xp*40+1,yp*40+21)!=9)
+        bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
 	}
     }
 }
@@ -149,6 +155,8 @@ void left_down(int x,int y)
 		parent[y][x][0]=xp;
 		parent[y][x][1]=yp;
 	    }
+        if(getpixel(xp*40+1,yp*40+21)!=9)
+    bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
 	}
     }
 }
@@ -170,6 +178,9 @@ void left(int x,int y)
 	    parent[y][x][0]=xp;
 	    parent[y][x][1]=yp;
 	}
+    if(getpixel(xp*40+1,yp*40+21)!=9)
+    bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
+    
 	}
     }
 }
@@ -192,6 +203,8 @@ void left_up(int x,int y)
 	    parent[y][x][0]=xp;
 	    parent[y][x][1]=yp;
 	}
+    if(getpixel(xp*40+1,yp*40+21)!=9)
+    bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
 	}
     }
 }
@@ -213,6 +226,8 @@ void up(int x,int y)
 	    parent[y][x][0]=xp;
 	    parent[y][x][1]=yp;
 	}
+    if(getpixel(xp*40+1,yp*40+21)!=9)
+    bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
 	}
     }
 }
@@ -235,6 +250,8 @@ void right_up(int x,int y)
 	    parent[y][x][0]=xp;
 	    parent[y][x][1]=yp;
 	}
+    if(getpixel(xp*40+1,yp*40+21)!=9)
+    bfill(xp*40+1,yp*40+21,getpixel(xp*40+1,yp*40+21),9);
 	}
     }
 }
@@ -254,6 +271,7 @@ void find(int x,int y)
 	left_up(x,y);
 	up(x,y);
 	right_up(x,y);
+    delay(100);
 	extract_min(&a,&b);
 	find(b,a);
     }
@@ -262,7 +280,7 @@ void find(int x,int y)
 void trace()
 {
     int x=xe,y=ye,temp,x_co,y_co;
-    printf("Tracing back : \n");
+    outtextxy(420,60,"Tracking Back");
     while(x!=xs || y!=ys)
     {
     x_co=parent[y][x][0]*40+1;
@@ -328,39 +346,45 @@ void main()
 {
  int gd=DETECT,gm;
  int in,j,xc,yc;
- char c='1';
- initgraph(&gd,&gm,"C:\\TURBOC3\\BGI");
- settextstyle(0,0,1);
- outtextxy(420,0,"WELCOME");
- outtextxy(420,10,"FOLLOW THE SEQUENCE FOR PROPER EXECUTION:");
- outtextxy(420,20,"press 1 and click to select start");
- outtextxy(420,30,"press 2 and click to select end");
- outtextxy(420,40,"press 3 and create obstacle");
- getch();
- for(in=0;in<=360;in=in+40)
-{
-  for(j=20;j<=380;j=j+40)
-  {
-   setcolor(RED);
-   rectangle(in,j,in+40,j+40);
-  }
-}
-  i.x.ax=1;
-  int86(51,&i,&o);
-  c=getch();
-  fill(c) ;    //start
-  c=getch();
-  fill(c) ;    //end
-  initialize();
-  block();
+ char c;
+ while(state=='1')
+    {
+            
+        initgraph(&gd,&gm,"C:\\TURBOC3\\BGI");
+        settextstyle(0,0,1);
+        outtextxy(420,0,"WELCOME");
+        outtextxy(420,10,"FOLLOW THE SEQUENCE FOR PROPER EXECUTION:");
+        outtextxy(420,20,"press 1 and click to select start");
+        outtextxy(420,30,"press 2 and click to select end");
+        outtextxy(420,40,"press 3 and create obstacle");
+        getch();
+        for(in=0;in<=360;in=in+40)
+        {
+            for(j=20;j<=380;j=j+40)
+            {
+                setcolor(RED);
+                rectangle(in,j,in+40,j+40);
+            }
+        }
+        i.x.ax=1;
+        int86(51,&i,&o);
+        c=getch();
+        fill(c) ;    //start
+        c=getch();
+        fill(c) ;    //end
+        initialize();
+        block();
 
-  c=getch();
-  printf("xs=%d ys=%d xe=%d ye=%d",xs,ys,xe,ye);
-   // printf("****\n Algo Begins \n");
-    find(xs,ys);
-    trace();
-    delay(1000);
-
-  getch();
+        c=getch();
+        outtextxy(420,50,"Searching");
+        find(xs,ys);
+        trace();
+        delay(1000);
+        // setcolor(YELLOW);
+        // rectangle(420,70,490,90);
+        // outtextxy(430,75,"Restart");
+        getch();
+        state='0';
+    }
 }
     
