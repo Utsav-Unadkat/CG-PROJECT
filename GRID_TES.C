@@ -280,7 +280,6 @@ void find(int x,int y)
 void trace()
 {
     int x=xe,y=ye,temp,x_co,y_co;
-    outtextxy(420,60,"Tracking Back");
     while(x!=xs || y!=ys)
     {
     x_co=parent[y][x][0]*40+1;
@@ -342,6 +341,32 @@ void block()
  }
 }
 
+void button()
+{
+    int xc,yc;
+    while(!kbhit())
+    {
+        i.x.ax=3;
+        int86(51,&i,&o);
+        if(o.x.bx==1)
+        {
+            xc=o.x.cx;
+            yc=o.x.dx;
+            if(xc<490 && xc>420 && yc<130 && yc>110)    //RESTART
+            {
+		        state='1' ;
+            }
+            else if(xc<550 && xc>500 && yc<130 && yc>110)    //RESTART
+            {
+		        state='0' ;
+            }
+            else
+            button();   //hit somewhere else
+            break;
+        }
+    }
+}
+
 void main()
 {
  int gd=DETECT,gm;
@@ -373,18 +398,19 @@ void main()
         c=getch();
         fill(c) ;    //end
         initialize();
-        block();
-
-        c=getch();
-        outtextxy(420,50,"Searching");
+        block();    //BLOCK CELLS
+        i.x.ax=2;
+        int86(51,&i,&o);
         find(xs,ys);
         trace();
-        delay(1000);
-        // setcolor(YELLOW);
-        // rectangle(420,70,490,90);
-        // outtextxy(430,75,"Restart");
-        getch();
-        state='0';
+	    i.x.ax=1;
+        int86(51,&i,&o);
+        setcolor(YELLOW);
+        rectangle(420,110,490,130);
+        outtextxy(430,115,"Restart");
+        rectangle(500,110,550,130);
+        outtextxy(510,115,"END");
+        button();
     }
 }
     
