@@ -1,5 +1,6 @@
-# CG-PROJECT
- Visualization of shortest path
+# Visualization of shortest path 
+Dijkstra's algorithm
+ 
 ## STEPS TO USE THE APP
 * Enter Any key to get to grid
 
